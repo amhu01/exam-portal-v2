@@ -59,4 +59,16 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }    
+    
+    // Student belongs to a class
+    public function classRoom()
+    {
+        return $this->belongsTo(ClassRoom::class, 'class_id');
+    }
+
+    // Lecturer teaches many class_subjects
+    public function classSubjects()
+    {
+        return $this->hasMany(ClassSubject::class, 'lecturer_id');
+    }    
 }
