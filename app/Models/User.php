@@ -46,7 +46,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
+
     public function isLecturer(): bool
     {
         return $this->role === 'lecturer';
@@ -55,13 +55,13 @@ class User extends Authenticatable
     public function isStudent(): bool
     {
         return $this->role === 'student';
-    }    
-    
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
-    }    
-    
+    }
+
     // Student belongs to a class
     public function classRoom()
     {
@@ -72,5 +72,24 @@ class User extends Authenticatable
     public function classSubjects()
     {
         return $this->hasMany(ClassSubject::class, 'lecturer_id');
-    }    
+    }
+
+    // Student has many exam submissions
+    public function submissions()
+    {
+        return $this->hasMany(ExamSubmission::class, 'student_id');
+    }
+
+    // Student has many enrollment requests
+    public function enrollmentRequests()
+    {
+        return $this->hasMany(EnrollmentRequest::class, 'student_id');
+    }
+
+    // Lecturer has many exams created
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'created_by');
+    }
+
 }
