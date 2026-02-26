@@ -17,6 +17,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     })->name('dashboard');
 
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::resource('classes', \App\Http\Controllers\Admin\ClassRoomController::class);
+    Route::resource('subjects', \App\Http\Controllers\Admin\SubjectController::class);
+
+    // Extra routes for assigning subjects and students to classes
+    Route::post('classes/{class}/subjects', [\App\Http\Controllers\Admin\ClassRoomController::class, 'assignSubject'])->name('classes.assignSubject');
+    Route::delete('classes/{class}/subjects/{classSubject}', [\App\Http\Controllers\Admin\ClassRoomController::class, 'removeSubject'])->name('classes.removeSubject');
+    Route::post('classes/{class}/students', [\App\Http\Controllers\Admin\ClassRoomController::class, 'assignStudent'])->name('classes.assignStudent');
+    Route::delete('classes/{class}/students/{student}', [\App\Http\Controllers\Admin\ClassRoomController::class, 'removeStudent'])->name('classes.removeStudent');
+    
 });
 
 Route::middleware(['auth', 'lecturer'])->prefix('lecturer')->name('lecturer.')->group(function () {
