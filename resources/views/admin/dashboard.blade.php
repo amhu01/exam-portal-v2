@@ -12,6 +12,15 @@
                     <h3 class="font-bold text-lg mb-2">👥 User Management</h3>
                     <p class="text-gray-600">Create and manage lecturers, students and admins.</p>
                 </a>
+                <a href="{{ route('admin.classes.index') }}" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 hover:bg-gray-50">
+                    <h3 class="font-bold text-lg mb-2">🏫 Class Management</h3>
+                    <p class="text-gray-600">Create classes and enroll students.</p>
+                </a>
+                <a href="{{ route('admin.subjects.index') }}" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 hover:bg-gray-50">
+                    <h3 class="font-bold text-lg mb-2">📚 Subject Management</h3>
+                    <p class="text-gray-600">Create subjects and assign lecturers.</p>
+                </a>
+                
             </div>
         </div>
     </div>

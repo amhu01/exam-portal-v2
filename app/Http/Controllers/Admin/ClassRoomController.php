@@ -7,6 +7,7 @@ use App\Models\ClassRoom;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClassRoomController extends Controller
 {
@@ -100,15 +101,14 @@ class ClassRoomController extends Controller
         $request->validate([
             'student_id' => 'required|exists:users,id',
         ]);
-
+        
         $student = User::find($request->student_id);
 
         if ($student->class_id) {
             return back()->with('error', 'Student is already assigned to a class!');
         }
-
+        
         $student->update(['class_id' => $class->id]);
-
         return back()->with('success', 'Student assigned successfully!');
     }
 
