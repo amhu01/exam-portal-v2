@@ -20,11 +20,51 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @php
+                        $dashboardRoute = match(auth()->user()->role) {
+                            'admin' => 'admin.dashboard',
+                            'lecturer' => 'lecturer.dashboard',
+                            default => 'student.dashboard',
+                        };
+                    @endphp
+
                     <x-nav-link :href="route($dashboardRoute)" :active="request()->routeIs($dashboardRoute)">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
-            </div>
+
+                    @if(auth()->user()->isAdmin())
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.classes.index')" :active="request()->routeIs('admin.classes.*')">
+                            {{ __('Classes') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.subjects.index')" :active="request()->routeIs('admin.subjects.*')">
+                            {{ __('Subjects') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.enrollment.index')" :active="request()->routeIs('admin.enrollment.*')">
+                            {{ __('Enrollments') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if(auth()->user()->isLecturer())
+                        <x-nav-link :href="route('lecturer.exams.index')" :active="request()->routeIs('lecturer.exams.*')">
+                            {{ __('My Exams') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('lecturer.grading.index')" :active="request()->routeIs('lecturer.grading.*')">
+                            {{ __('Grading') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if(auth()->user()->isStudent())
+                        <x-nav-link :href="route('student.exams.index')" :active="request()->routeIs('student.exams.*')">
+                            {{ __('My Exams') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('student.enrollment.index')" :active="request()->routeIs('student.enrollment.*')">
+                            {{ __('Enrollment') }}
+                        </x-nav-link>
+                    @endif
+                </div>            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -78,6 +118,39 @@
             <x-responsive-nav-link :href="route($dashboardRoute)" :active="request()->routeIs($dashboardRoute)">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if(auth()->user()->isAdmin())
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.classes.index')" :active="request()->routeIs('admin.classes.*')">
+                    {{ __('Classes') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.subjects.index')" :active="request()->routeIs('admin.subjects.*')">
+                    {{ __('Subjects') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.enrollment.index')" :active="request()->routeIs('admin.enrollment.*')">
+                    {{ __('Enrollments') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if(auth()->user()->isLecturer())
+                <x-responsive-nav-link :href="route('lecturer.exams.index')" :active="request()->routeIs('lecturer.exams.*')">
+                    {{ __('My Exams') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('lecturer.grading.index')" :active="request()->routeIs('lecturer.grading.*')">
+                    {{ __('Grading') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if(auth()->user()->isStudent())
+                <x-responsive-nav-link :href="route('student.exams.index')" :active="request()->routeIs('student.exams.*')">
+                    {{ __('My Exams') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('student.enrollment.index')" :active="request()->routeIs('student.enrollment.*')">
+                    {{ __('Enrollment') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

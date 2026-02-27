@@ -4,9 +4,14 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $stats = [
+        'classes' => \App\Models\ClassRoom::count(),
+        'subjects' => \App\Models\Subject::count(),
+        'exams' => \App\Models\Exam::where('is_published', true)->count(),
+        'students' => \App\Models\User::where('role', 'student')->count(),
+    ];
+    return view('welcome', compact('stats'));
 });
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
