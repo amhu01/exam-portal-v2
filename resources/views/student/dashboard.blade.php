@@ -26,10 +26,10 @@
                         <p class="text-gray-600">{{ auth()->user()->classRoom->name }}</p>
                         <p class="text-gray-500 text-sm">{{ auth()->user()->classRoom->code }}</p>
                     </div>
-                    {{-- <a href="{{ route('student.exams.index') }}" class="bg-white shadow-sm sm:rounded-lg p-6 hover:bg-gray-50">
+                    <a href="{{ route('student.exams.index') }}" class="bg-white shadow-sm sm:rounded-lg p-6 hover:bg-gray-50">
                         <h3 class="font-bold text-lg mb-2">📝 My Exams</h3>
                         <p class="text-gray-600">View and take your assigned exams.</p>
-                    </a> --}}
+                    </a>
                 </div>
             @endif
         </div>

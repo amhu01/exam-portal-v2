@@ -12,6 +12,10 @@
                     <h3 class="font-bold text-lg mb-2">📝 My Exams</h3>
                     <p class="text-gray-600">Create and manage your exams.</p>
                 </a>
+                <a href="{{ route('lecturer.grading.index') }}" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 hover:bg-gray-50">
+                    <h3 class="font-bold text-lg mb-2">✏️ Grading</h3>
+                    <p class="text-gray-600">Grade student exam submissions.</p>
+                </a>                
             </div>
         </div>
     </div>
