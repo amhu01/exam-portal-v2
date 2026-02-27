@@ -20,7 +20,10 @@
                     <h3 class="font-bold text-lg mb-2">📚 Subject Management</h3>
                     <p class="text-gray-600">Create subjects and assign lecturers.</p>
                 </a>
-                
+                <a href="{{ route('admin.enrollment.index') }}" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 hover:bg-gray-50">
+                    <h3 class="font-bold text-lg mb-2">📋 Enrollment Requests</h3>
+                    <p class="text-gray-600">Review and approve student enrollment requests.</p>
+                </a>
             </div>
         </div>
     </div>
