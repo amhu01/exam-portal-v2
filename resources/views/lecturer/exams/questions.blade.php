@@ -148,6 +148,10 @@
                         @error('options')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
+                        
+                        @error('options.*')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
 
                         <button type="button" @click="addOption"
                             class="mt-2 text-blue-500 hover:text-blue-700 font-semibold text-sm">

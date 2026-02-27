@@ -31,9 +31,18 @@ class QuestionController extends Controller
             'type' => 'required|in:mcq,open_text',
             'marks' => 'required|integer|min:1',
             'options' => 'required_if:type,mcq|array|min:2',
-            'options.*' => 'required_if:type,mcq|string',
+            'options.*' => 'nullable|string',
             'correct_option' => 'required_if:type,mcq|integer',
+        ],[
+            'options.*.required_if' => 'Do not leave any options blank',
         ]);
+        if ($request->type === 'mcq') {
+            $filledOptions = array_filter($request->options, fn($o) => !empty(trim($o)));
+            if (count($filledOptions) < 2) {
+                return back()->with('error', 'Please provide at least 2 options.')->withInput();
+            }
+        }        
+        
         try {
             $order = $exam->questions()->count() + 1;
 
